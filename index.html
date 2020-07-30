@@ -26,7 +26,8 @@
     ></div>
     <script type="text/babel">
       let lStorage = window.localStorage.getItem("toDoApp");
-      if (!lStorage) window.localStorage.setItem("toDoApp", JSON.stringify([]));
+      if (!lStorage){ window.localStorage.setItem("toDoApp", JSON.stringify([]));
+      lStorage = window.localStorage.getItem("toDoApp");}
       const App = () => {
         const [dolist, setDolist] = React.useState(JSON.parse(lStorage));
         const [donelist, setDonelist] = React.useState([]);
