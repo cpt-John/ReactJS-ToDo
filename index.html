@@ -25,9 +25,17 @@
       id="container"
     ></div>
     <script type="text/babel">
+      let lStorage = window.localStorage.getItem("toDoApp");
+      if (!lStorage) window.localStorage.setItem("toDoApp", JSON.stringify([]));
       const App = () => {
-        const [dolist, setDolist] = React.useState([]);
+        const [dolist, setDolist] = React.useState(JSON.parse(lStorage));
         const [donelist, setDonelist] = React.useState([]);
+        function setLocal(list) {
+          window.localStorage.setItem("toDoApp", JSON.stringify(list));
+        }
+        React.useEffect(() => {
+          setLocal([...dolist]);
+        }, [dolist]);
         function addToDo() {
           let new_todo = document.getElementById("todoinput").value;
           if (!new_todo) return;
