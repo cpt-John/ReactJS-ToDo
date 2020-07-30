@@ -1,0 +1,96 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: #edf0f1;
+  background-image: radial-gradient(#fddb92 0%, #d1fdff 100%);
+}
+
+.todoapp {
+  width: 40em;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 2px 4px rgba(44, 62, 80, 0.15);
+  border-radius: 10px;
+}
+.todoapp h1 {
+  font-size: 1.6rem;
+  text-align: center;
+  color: #738598;
+  margin: 0 0 20px 0;
+}
+header {
+  width: 100%;
+  height: 80px;
+  position: relative;
+  padding: 15px;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background: #25b99a;
+  box-shadow: 0px 2px 4px rgba(44, 62, 80, 0.15);
+}
+header input {
+  width: 100%;
+  height: 50px;
+  float: left;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  text-indent: 20px;
+  padding: 0 60px 0 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  border: 0px;
+  box-shadow: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+header button {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  cursor: pointer;
+  top: 15px;
+  right: 15px;
+  z-index: 2;
+  border: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+.addbtn {
+  font-weight: bolder;
+  font-size: large;
+}
+ul {
+  list-style: none;
+  text-align: center;
+}
+ul#todo:empty:after {
+  font-weight: 100;
+  font-style: italic;
+  content: "You have nothing to do!";
+}
+ul#completed:empty:after {
+  font-weight: 100;
+  font-style: italic;
+  content: "You have yet to complete any tasks!";
+}
+content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

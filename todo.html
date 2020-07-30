@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./todo.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="container p-5 d-flex justify-content-center"
+      id="container"
+    ></div>
+    <script type="text/babel">
+      const App = () => {
+        const [dolist, setDolist] = React.useState([]);
+        const [donelist, setDonelist] = React.useState([]);
+        function addToDo() {
+          let new_todo = document.getElementById("todoinput").value;
+          if (!new_todo) return;
+          document.getElementById("todoinput").value = "";
+          setDolist((dolist) => [...dolist, new_todo]);
+        }
+
+        function deleteFromDo(id) {
+          setDolist((dolist) => {
+            dolist.splice(id, 1);
+            return [...dolist];
+          });
+        }
+        function deleteFromDone(id) {
+          setDonelist((donelist) => {
+            donelist.splice(id, 1);
+            return [...donelist];
+          });
+        }
+        function addToDone(id) {
+          let new_done = dolist[id];
+          deleteFromDo(id);
+          setDonelist((donelist) => [...donelist, new_done]);
+        }
+        function moveToDo(id) {
+          let new_todo = donelist[id];
+          deleteFromDone(id);
+          setDolist((dolist) => [...dolist, new_todo]);
+        }
+        const LiEle = (props) => (
+          <li className="shadow-sm p-3 mb-1 bg-light rounded d-flex justify-content-between flex-wrap">
+            <div className="content">{props.txt}</div>
+            <div className="d-flex flex-row">
+              <button className="btn btn-danger mx-2" onClick={props.delete_}>
+                delete
+              </button>
+              <button
+                className={`btn btn-${props.btncolor}`}
+                onClick={props.donefunc}
+              >
+                {props.btntxt}
+              </button>
+            </div>
+          </li>
+        );
+        const DoList = () => {
+          return (
+            <ul className="p-0 mt-3 px-5" id="todo">
+              {dolist.map((e, i) => (
+                <LiEle
+                  key={i}
+                  txt={e}
+                  delete_={() => deleteFromDo(i)}
+                  donefunc={() => addToDone(i)}
+                  btntxt="done"
+                  btncolor="success"
+                />
+              ))}
+            </ul>
+          );
+        };
+        const DoneList = () => {
+          return (
+            <ul className="p-0 mt-3 px-5" id="completed">
+              {donelist.map((e, i) => (
+                <LiEle
+                  key={i}
+                  txt={e}
+                  delete_={() => deleteFromDone(i)}
+                  donefunc={() => moveToDo(i)}
+                  btntxt="undo"
+                  btncolor="secondary"
+                />
+              ))}
+            </ul>
+          );
+        };
+        return (
+          <div id="main" className="todoapp">
+            <h1>Daily to To-Do List</h1>
+            <header>
+              <input
+                type="text"
+                placeholder="Enter an activity..."
+                id="todoinput"
+              />
+              <button
+                id="add"
+                className="btn btn-success addbtn"
+                onClick={addToDo}
+              >
+                +
+              </button>
+            </header>
+            <DoList />
+
+            <hr className="px-5 mt-3" />
+            <DoneList />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.getElementById("container"));
+    </script>
+  </body>
+</html>
